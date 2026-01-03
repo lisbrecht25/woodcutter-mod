@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "woodcutter",
+	"version": "1.0",
+	"name": "Woodcutter Mod",
+	"description": "This mod adds a block similar to the stonecutter but for wood.",
+	"authors": [
+		"Stxtic01"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/woodcutter/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"lukeisbrecht.woodcutter.Woodcutter"
+		],
+		"client": [
+			"lukeisbrecht.woodcutter.WoodcutterClient"
+		],
+		"fabric-datagen": [
+			"lukeisbrecht.woodcutter.WoodcutterDataGenerator"
+		]
+	},
+	"mixins": [
+		"woodcutter.mixins.json",
+		{
+			"config": "woodcutter.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
