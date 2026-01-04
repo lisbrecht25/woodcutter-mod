@@ -1,19 +1,7 @@
 {
   "variants": {
-    "facing=north": {
+    "": {
       "model": "woodcutter:block/wood_cutter"
-    },
-    "facing=south": {
-      "model": "woodcutter:block/wood_cutter",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "woodcutter:block/wood_cutter",
-      "y": 270
-    },
-    "facing=east": {
-      "model": "woodcutter:block/wood_cutter",
-      "y": 90
     }
   }
 }
