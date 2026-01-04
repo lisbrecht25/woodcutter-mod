@@ -1,24 +1,60 @@
 package lukeisbrecht.woodcutter;
 
+import lukeisbrecht.woodcutter.block.WoodcutterBlock;
+import lukeisbrecht.woodcutter.screen.WoodcutterScreenHandler;
 import net.fabricmc.api.ModInitializer;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
+import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.Identifier;
 
 public class Woodcutter implements ModInitializer {
 	public static final String MOD_ID = "woodcutter";
 
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static Block WOODCUTTER_BLOCK;
+	public static ScreenHandlerType<WoodcutterScreenHandler> WOODCUTTER_SCREEN_HANDLER;
 
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
+		// Create identifiers
+		Identifier blockId = Identifier.of(MOD_ID, "wood_cutter");
 
-		LOGGER.info("Hello Fabric world!");
+		// Create registry keys
+		RegistryKey<Block> blockKey = RegistryKey.of(RegistryKeys.BLOCK, blockId);
+		RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, blockId);
+
+		// Register block with registry key
+		WOODCUTTER_BLOCK = Registry.register(
+				Registries.BLOCK,
+				blockId,
+				new WoodcutterBlock(AbstractBlock.Settings.create()
+						.registryKey(blockKey)
+						.strength(3.5f)
+						.requiresTool()
+						.sounds(BlockSoundGroup.WOOD))
+		);
+
+		// Register block item with registry key
+		Registry.register(
+				Registries.ITEM,
+				blockId,
+				new BlockItem(WOODCUTTER_BLOCK, new Item.Settings()
+						.registryKey(itemKey))
+		);
+
+		// Register screen handler
+		WOODCUTTER_SCREEN_HANDLER = Registry.register(
+				Registries.SCREEN_HANDLER,
+				blockId,
+				new ScreenHandlerType<>(WoodcutterScreenHandler::new, FeatureFlags.VANILLA_FEATURES)
+		);
 	}
 }

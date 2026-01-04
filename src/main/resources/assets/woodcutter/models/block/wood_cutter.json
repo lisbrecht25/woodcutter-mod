@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "woodcutter:block/wood_cutter_top.png",
+    "down": "woodcutter:block/wood_cutter_bottom",
+    "up": "woodcutter:block/wood_cutter_top",
+    "north": "woodcutter:block/wood_cutter_side",
+    "east": "woodcutter:block/wood_cutter_side",
+    "south": "woodcutter:block/wood_cutter_side",
+    "west": "woodcutter:block/wood_cutter_side"
+  }
+}
